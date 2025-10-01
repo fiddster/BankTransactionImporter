@@ -116,19 +116,19 @@ public class TransactionMapper : ITransactionMapper
             return bestMatch;
         }
 
-        // Handle income transactions
-        if (transaction.IsIncome)
-        {
-            var incomeCategory = sheetStructure.Categories.FirstOrDefault(c => c.Type == CategoryType.Income);
-            if (incomeCategory != null)
-            {
-                _logger.LogDebug("Mapped income transaction '{MappingKey}' to '{CategoryName}'",
-                    mappingKey, incomeCategory.Name);
-                return incomeCategory;
-            }
-        }
+        // Don't automatically map positive amounts as income - they could be transfers, refunds, etc.
+        // Only transactions matching explicit income patterns should be categorized as income
 
-        _logger.LogWarning("No mapping found for transaction: {Transaction}", transaction);
+        var maskedMappingKey = transaction.MappingKey.Length > 4
+            ? transaction.MappingKey[..4] + "***"
+            : transaction.MappingKey;
+
+        _logger.LogWarning("No mapping found for transaction - RowNumber: {RowNumber}, BookingDate: {BookingDate}, TransactionType: {TransactionType}, Currency: {Currency}, MaskedKey: {MaskedKey}",
+            transaction.RowNumber,
+            transaction.BookingDate,
+            transaction.IsIncome ? "Income" : "Expense",
+            transaction.Currency,
+            maskedMappingKey);
         return null;
     }
 

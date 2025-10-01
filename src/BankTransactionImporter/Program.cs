@@ -5,13 +5,34 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-// Build configuration
-var basePath = Directory.GetCurrentDirectory();
-// Go up two directories to find the config folder
-var configPath = Path.Combine(basePath, "..", "..", "config", "appsettings.json");
+// Build configuration using a robust path resolution strategy
+// 1. Use AppContext.BaseDirectory (executable location) as the primary base path
+// 2. Allow config file override via BANKTRANSACTIONIMPORTER_CONFIG environment variable
+// 3. Fall back to development path structure for local debugging
+var basePath = AppContext.BaseDirectory ?? Directory.GetCurrentDirectory();
+
+// Allow config file override via environment variable (useful for deployments)
+var configFileName = Environment.GetEnvironmentVariable("BANKTRANSACTIONIMPORTER_CONFIG") ?? "appsettings.json";
+var configPath = Path.GetFullPath(Path.Combine(basePath, configFileName));
+
+// Check if config file exists, if not, try in project directory during development
+if (!File.Exists(configPath))
+{
+    var developmentConfigPath = Path.GetFullPath(Path.Combine(basePath, "..", "..", "src", "BankTransactionImporter", configFileName));
+    if (File.Exists(developmentConfigPath))
+    {
+        configPath = developmentConfigPath;
+    }
+    else
+    {
+        throw new FileNotFoundException($"Configuration file not found. Searched in: '{configPath}' and '{developmentConfigPath}'. Set BANKTRANSACTIONIMPORTER_CONFIG environment variable to specify a custom path.");
+    }
+}
+
+var configDirectory = Path.GetDirectoryName(configPath) ?? basePath;
 var configuration = new ConfigurationBuilder()
-    .SetBasePath(basePath)
-    .AddJsonFile(configPath, optional: false, reloadOnChange: true)
+    .SetBasePath(configDirectory)
+    .AddJsonFile(Path.GetFileName(configPath), optional: false, reloadOnChange: true)
     .Build();
 
 // Build service provider
@@ -36,7 +57,7 @@ services.AddSingleton<IGoogleSheetsService, GoogleSheetsService>();
 services.AddSingleton<Application>();
 
 // Build and run
-var serviceProvider = services.BuildServiceProvider();
+using var serviceProvider = services.BuildServiceProvider();
 
 try
 {

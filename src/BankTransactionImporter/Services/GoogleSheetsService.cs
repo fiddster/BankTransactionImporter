@@ -26,9 +26,17 @@ public class GoogleSheetsService : IGoogleSheetsService
 
         try
         {
-            // For now, we'll use a placeholder for Google Sheets authentication
-            // In a real implementation, you would need to set up OAuth2 or service account credentials
-            _logger.LogWarning("Google Sheets service not yet configured with credentials. Using mock implementation.");
+            // For now, we'll create a minimal mock SheetsService to prevent NullReferenceExceptions
+            // when TODO code is enabled. In a real implementation, you would need to set up 
+            // OAuth2 or service account credentials
+            _logger.LogWarning("Google Sheets service not yet configured with real credentials. Creating mock SheetsService instance to prevent null reference issues.");
+
+            // Create a minimal SheetsService instance without credentials (mock mode)
+            // This prevents NullReferenceExceptions when TODO code is uncommented
+            _sheetsService = new SheetsService(new BaseClientService.Initializer()
+            {
+                ApplicationName = "BankTransactionImporter-MockMode"
+            });
 
             // TODO: Implement actual Google Sheets authentication
             // var credential = GoogleCredential.FromFile("path-to-credentials.json")
@@ -87,7 +95,8 @@ public class GoogleSheetsService : IGoogleSheetsService
 
         var range = $"{sheetName}!{SheetStructure.IndexToColumnLetter(column)}{row}";
 
-        _logger.LogInformation("Would read cell {Range}", range);
+        _logger.LogError("Google Sheets read not implemented. Attempted to read cell {Range} from spreadsheet {SpreadsheetId}",
+            range, spreadsheetId);
 
         // TODO: Implement actual Google Sheets read
         // var request = _sheetsService.Spreadsheets.Values.Get(spreadsheetId, range);
@@ -102,7 +111,79 @@ public class GoogleSheetsService : IGoogleSheetsService
         //     }
         // }
 
-        return 0m;
+        throw new NotImplementedException($"Google Sheets read not implemented. Implement Sheets API call here to read range '{range}' from spreadsheet '{spreadsheetId}'.");
+    }
+
+    public async Task<Dictionary<(int row, int column), decimal>> BatchGetCellValuesAsync(string spreadsheetId, string sheetName, IEnumerable<(int row, int column)> coordinates)
+    {
+        await InitializeServiceAsync();
+
+        var result = new Dictionary<(int row, int column), decimal>();
+        var coordinatesList = coordinates.ToList();
+
+        if (!coordinatesList.Any())
+        {
+            return result;
+        }
+
+        _logger.LogInformation("Would batch read {CellCount} cells from sheet '{SheetName}'", coordinatesList.Count, sheetName);
+
+        // Log the ranges that would be read
+        foreach (var (row, column) in coordinatesList)
+        {
+            var range = $"{sheetName}!{SheetStructure.IndexToColumnLetter(column)}{row}";
+            _logger.LogInformation("  Reading {Range}", range);
+
+            // For mock implementation, return 0 for all cells
+            result[(row, column)] = 0m;
+        }
+
+        // TODO: Implement actual Google Sheets batch read
+        // Create ranges for batch request
+        // var ranges = coordinatesList.Select(coord => 
+        //     $"{sheetName}!{SheetStructure.IndexToColumnLetter(coord.column)}{coord.row}").ToList();
+        //
+        // var batchRequest = _sheetsService.Spreadsheets.Values.BatchGet(spreadsheetId);
+        // batchRequest.Ranges = ranges;
+        // batchRequest.ValueRenderOption = SpreadsheetsResource.ValuesResource.BatchGetRequest.ValueRenderOptionEnum.UNFORMATTEDVALUE;
+        //
+        // try
+        // {
+        //     var batchResponse = await batchRequest.ExecuteAsync();
+        //
+        //     for (int i = 0; i < coordinatesList.Count && i < batchResponse.ValueRanges.Count; i++)
+        //     {
+        //         var coord = coordinatesList[i];
+        //         var valueRange = batchResponse.ValueRanges[i];
+        //
+        //         decimal cellValue = 0m;
+        //         if (valueRange?.Values?.Count > 0 && valueRange.Values[0]?.Count > 0)
+        //         {
+        //             var rawValue = valueRange.Values[0][0]?.ToString();
+        //             if (!string.IsNullOrEmpty(rawValue))
+        //             {
+        //                 decimal.TryParse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture, out cellValue);
+        //             }
+        //         }
+        //
+        //         result[coord] = cellValue;
+        //     }
+        // }
+        // catch (Exception ex)
+        // {
+        //     _logger.LogError(ex, "Failed to batch read cells from Google Sheets");
+        //     
+        //     // Fall back to individual reads or return zeros
+        //     foreach (var coord in coordinatesList)
+        //     {
+        //         if (!result.ContainsKey(coord))
+        //         {
+        //             result[coord] = 0m;
+        //         }
+        //     }
+        // }
+
+        return result;
     }
 
     public async Task BatchUpdateCellsAsync(string spreadsheetId, string sheetName, Dictionary<(int row, int column), decimal> updates)
@@ -144,7 +225,7 @@ public class GoogleSheetsService : IGoogleSheetsService
         {
             // Income
             new() { Name = "Inkomst", Section = "Income", RowIndex = 2, Type = CategoryType.Income,
-                   MappingPatterns = new() { "LÖN", "LOEN", "SALARY" } },
+                   MappingPatterns = new() { "LÖN", "L�N", "LON", "LOEN", "SALARY" } },
             
             // Shared expenses (Gemensamma)
             new() { Name = "Hyra", Section = "Gemensamma", RowIndex = 4, Type = CategoryType.SharedExpense,

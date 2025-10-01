@@ -96,12 +96,8 @@ public class SheetStructure
         if (directMatch != null)
             return directMatch;
 
-        // If no direct match and it's income, return income category
-        if (transaction.IsIncome)
-        {
-            return Categories.FirstOrDefault(c => c.Type == CategoryType.Income);
-        }
-
+        // Don't automatically map positive amounts as income - they could be transfers
+        // Only explicit income patterns should be mapped to income categories
         return null;
     }
 }

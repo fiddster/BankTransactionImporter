@@ -49,11 +49,24 @@ public class Application
     private async Task ProcessTransactionsAsync(CommandLineOptions options)
     {
         // Load mapping rules
-        var mappingRulesPath = Path.Combine(
-            Directory.GetCurrentDirectory(),
-            "..", "..",
-            "config", "mapping-rules.json");
-        _transactionMapper.LoadMappingRules(mappingRulesPath);
+        var mappingRulesPath = GetMappingRulesPath();
+
+        if (!File.Exists(mappingRulesPath))
+        {
+            _logger.LogError("Mapping rules file not found at path: {MappingRulesPath}", mappingRulesPath);
+            throw new FileNotFoundException($"Mapping rules file not found at path: {mappingRulesPath}");
+        }
+
+        try
+        {
+            _transactionMapper.LoadMappingRules(mappingRulesPath);
+            _logger.LogInformation("Successfully loaded mapping rules from {MappingRulesPath}", mappingRulesPath);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to load mapping rules from {MappingRulesPath}", mappingRulesPath);
+            throw new InvalidOperationException($"Failed to load mapping rules from {mappingRulesPath}", ex);
+        }
 
         // Parse transactions from file
         var transactions = await _csvParser.ParseTransactionsAsync(options.FilePath);
@@ -155,6 +168,10 @@ public class Application
 
         var updates = new Dictionary<(int row, int column), decimal>();
 
+        // Optimization: Collect all coordinates that need to be read to avoid N sequential API calls
+        var coordinatesToRead = new List<(int row, int column)>();
+        var transactionData = new List<(int row, int column, decimal total)>();
+
         foreach (var kvp in mappedTransactions)
         {
             var category = kvp.Value.First().category;
@@ -164,10 +181,18 @@ public class Application
             var row = category.RowIndex;
             var column = sheetStructure.GetColumnForMonth(month);
 
-            // Add current amount to existing value
-            var currentValue = await _googleSheetsService.GetCellValueAsync(
-                _settings.GoogleSheets.SpreadsheetId, sheetName, row, column);
+            coordinatesToRead.Add((row, column));
+            transactionData.Add((row, column, total));
+        }
 
+        // Batch read all current cell values in a single API call instead of individual GetCellValueAsync calls
+        var currentValues = await _googleSheetsService.BatchGetCellValuesAsync(
+            _settings.GoogleSheets.SpreadsheetId, sheetName, coordinatesToRead);
+
+        // Process updates using the batched values
+        foreach (var (row, column, total) in transactionData)
+        {
+            var currentValue = currentValues.GetValueOrDefault((row, column), 0m);
             updates[(row, column)] = currentValue + total;
         }
 
@@ -239,6 +264,26 @@ public class Application
         Console.WriteLine("Examples:");
         Console.WriteLine("  dotnet run -- --file \"data/transactions.csv\"");
         Console.WriteLine("  dotnet run -- --file \"data/transactions.csv\" --sheet \"2025\" --dry-run");
+    }
+
+    private string GetMappingRulesPath()
+    {
+        // Use configured path if available and not empty
+        if (!string.IsNullOrWhiteSpace(_settings.Processing.MappingRulesPath))
+        {
+            // If the configured path is absolute, use it directly
+            if (Path.IsPathRooted(_settings.Processing.MappingRulesPath))
+            {
+                return _settings.Processing.MappingRulesPath;
+            }
+
+            // If relative, combine with application base directory
+            return Path.Combine(AppContext.BaseDirectory, _settings.Processing.MappingRulesPath);
+        }
+
+        // Fallback to default path in application directory
+        _logger.LogWarning("MappingRulesPath not configured, using default path");
+        return Path.Combine(AppContext.BaseDirectory, "mapping-rules.json");
     }
 
     private class CommandLineOptions

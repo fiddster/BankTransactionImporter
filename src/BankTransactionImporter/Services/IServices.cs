@@ -20,5 +20,10 @@ public interface IGoogleSheetsService
     Task<SheetStructure> LoadSheetStructureAsync(string spreadsheetId, string sheetName);
     Task UpdateCellAsync(string spreadsheetId, string sheetName, int row, int column, decimal value);
     Task<decimal> GetCellValueAsync(string spreadsheetId, string sheetName, int row, int column);
+    /// <summary>
+    /// Batch read multiple cell values in a single API call to avoid N sequential requests.
+    /// Returns a dictionary keyed by (row, column) coordinates with the decimal values.
+    /// </summary>
+    Task<Dictionary<(int row, int column), decimal>> BatchGetCellValuesAsync(string spreadsheetId, string sheetName, IEnumerable<(int row, int column)> coordinates);
     Task BatchUpdateCellsAsync(string spreadsheetId, string sheetName, Dictionary<(int row, int column), decimal> updates);
 }
