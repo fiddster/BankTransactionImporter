@@ -4,3 +4,6 @@
 **/[Rr]elease*/
 **/[Tt]est[Rr]esults*/
 data/
+.claude/
+.vscode/
+**/CLAUDE.md

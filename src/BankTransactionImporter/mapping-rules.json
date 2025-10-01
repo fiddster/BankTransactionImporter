@@ -1,7 +1,6 @@
 {
 	"MappingRules": {
 		"LÖN": "Inkomst",
-		"L�N": "Inkomst",
 		"LON": "Inkomst",
 		"LOEN": "Inkomst",
 		"SALARY": "Inkomst",
@@ -27,7 +26,6 @@
 		"PLAYSTATION": "Playstation+",
 		"BÄCKAMOT": "Bäckamot",
 		"BACKAMOT": "Bäckamot",
-		"B�CKAMOT": "Bäckamot",
 		"MAT": "Mat",
 		"FOOD": "Mat",
 		"ICA": "Mat",

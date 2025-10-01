@@ -51,6 +51,7 @@ configuration.Bind(appSettings);
 services.AddSingleton(appSettings);
 
 // Add services
+services.AddSingleton<IConfigurationValidationService, ConfigurationValidationService>();
 services.AddSingleton<ICsvParser, CsvParser>();
 services.AddSingleton<ITransactionMapper, TransactionMapper>();
 services.AddSingleton<IGoogleSheetsService, GoogleSheetsService>();
@@ -61,6 +62,29 @@ using var serviceProvider = services.BuildServiceProvider();
 
 try
 {
+    // Validate configuration before running application
+    var validationService = serviceProvider.GetRequiredService<IConfigurationValidationService>();
+    var validationResult = validationService.ValidateConfiguration(appSettings);
+
+    var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+
+    foreach (var warning in validationResult.Warnings)
+    {
+        logger.LogWarning("Configuration warning: {Warning}", warning);
+    }
+
+    if (!validationResult.IsValid)
+    {
+        logger.LogError("Configuration validation failed:");
+        foreach (var error in validationResult.Errors)
+        {
+            logger.LogError("  - {Error}", error);
+        }
+        return 1;
+    }
+
+    logger.LogInformation("Configuration validation passed successfully");
+
     var app = serviceProvider.GetRequiredService<Application>();
     await app.RunAsync(args);
 }

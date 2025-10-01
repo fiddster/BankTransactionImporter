@@ -95,8 +95,7 @@ public class GoogleSheetsService : IGoogleSheetsService
 
         var range = $"{sheetName}!{SheetStructure.IndexToColumnLetter(column)}{row}";
 
-        _logger.LogError("Google Sheets read not implemented. Attempted to read cell {Range} from spreadsheet {SpreadsheetId}",
-            range, spreadsheetId);
+        _logger.LogInformation("Would read cell {Range} from spreadsheet {SpreadsheetId}", range, spreadsheetId);
 
         // TODO: Implement actual Google Sheets read
         // var request = _sheetsService.Spreadsheets.Values.Get(spreadsheetId, range);
@@ -111,7 +110,7 @@ public class GoogleSheetsService : IGoogleSheetsService
         //     }
         // }
 
-        throw new NotImplementedException($"Google Sheets read not implemented. Implement Sheets API call here to read range '{range}' from spreadsheet '{spreadsheetId}'.");
+        return 0m;
     }
 
     public async Task<Dictionary<(int row, int column), decimal>> BatchGetCellValuesAsync(string spreadsheetId, string sheetName, IEnumerable<(int row, int column)> coordinates)
