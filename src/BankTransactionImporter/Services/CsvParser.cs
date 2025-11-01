@@ -30,8 +30,8 @@ public class CsvParser : ICsvParser
 
         try
         {
-            // Use UTF-8 encoding to handle Swedish characters
-            using var reader = new StreamReader(stream, Encoding.UTF8);
+            // Use Windows-1252 encoding which is common for Swedish bank files
+            using var reader = new StreamReader(stream, Encoding.GetEncoding("Windows-1252"), detectEncodingFromByteOrderMarks: true);
 
             // Skip the first line (metadata)
             var firstLine = await reader.ReadLineAsync();
@@ -90,13 +90,13 @@ public class CsvParser : ICsvParser
                 AccountNumber = csv.GetField("Kontonummer") ?? string.Empty,
                 Product = csv.GetField("Produkt") ?? string.Empty,
                 Currency = csv.GetField("Valuta") ?? string.Empty,
-                BookingDate = ParseSwedishDate(csv.GetField("Bokföringsdag")),
+                BookingDate = ParseSwedishDate(GetFieldWithEncodingFallback(csv, "Bokföringsdag", "Bokf�ringsdag")),
                 TransactionDate = ParseSwedishDate(csv.GetField("Transaktionsdag")),
                 CurrencyDate = ParseSwedishDate(csv.GetField("Valutadag")),
                 Reference = csv.GetField("Referens") ?? string.Empty,
                 Description = csv.GetField("Beskrivning") ?? string.Empty,
                 Amount = ParseSwedishDecimal(csv.GetField("Belopp")),
-                BookedBalance = ParseSwedishDecimal(csv.GetField("Bokfört saldo"))
+                BookedBalance = ParseSwedishDecimal(GetFieldWithEncodingFallback(csv, "Bokfört saldo", "Bokf�rt saldo"))
             };
 
             // Clean up reference and description fields
@@ -117,6 +117,30 @@ public class CsvParser : ICsvParser
         return field?.Replace("\"", "").Trim() ?? string.Empty;
     }
 
+    private static string? GetFieldWithEncodingFallback(CsvReader csv, string preferredFieldName, string fallbackFieldName)
+    {
+        // Try the preferred field name first
+        try
+        {
+            var value = csv.GetField(preferredFieldName);
+            if (value != null) return value;
+        }
+        catch
+        {
+            // If the preferred field doesn't exist, try the fallback
+        }
+        
+        // Try the fallback field name (for malformed encoding)
+        try
+        {
+            return csv.GetField(fallbackFieldName);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
     private static int ParseInt(string? value)
     {
         if (string.IsNullOrWhiteSpace(value))
@@ -125,24 +149,30 @@ public class CsvParser : ICsvParser
         return int.TryParse(value, out var result) ? result : 0;
     }
 
-    private static DateTime ParseSwedishDate(string? dateString)
+    private DateTime ParseSwedishDate(string? dateString)
     {
         if (string.IsNullOrWhiteSpace(dateString))
+        {
+            _logger.LogDebug("Empty date string received");
             return DateTime.MinValue;
+        }
 
         // Expected format: yyyy-MM-dd
         if (DateTime.TryParseExact(dateString, "yyyy-MM-dd",
             CultureInfo.InvariantCulture, DateTimeStyles.None, out var result))
         {
+            _logger.LogDebug("Successfully parsed date '{DateString}' as {ParsedDate}", dateString, result);
             return result;
         }
 
         // Fallback to general parsing
         if (DateTime.TryParse(dateString, out result))
         {
+            _logger.LogDebug("Parsed date '{DateString}' using fallback as {ParsedDate}", dateString, result);
             return result;
         }
 
+        _logger.LogWarning("Failed to parse date string: '{DateString}'", dateString);
         return DateTime.MinValue;
     }
 

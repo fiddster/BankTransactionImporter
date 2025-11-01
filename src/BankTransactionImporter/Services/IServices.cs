@@ -26,4 +26,8 @@ public interface IGoogleSheetsService
     /// </summary>
     Task<Dictionary<(int row, int column), decimal>> BatchGetCellValuesAsync(string spreadsheetId, string sheetName, IEnumerable<(int row, int column)> coordinates);
     Task BatchUpdateCellsAsync(string spreadsheetId, string sheetName, Dictionary<(int row, int column), decimal> updates);
+    /// <summary>
+    /// Downloads all data from a Google Sheet and returns it as a list of rows, where each row is a list of cell values.
+    /// </summary>
+    Task<List<List<string>>> GetAllSheetDataAsync(string spreadsheetId, string sheetName);
 }

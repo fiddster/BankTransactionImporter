@@ -1,0 +1,1467 @@
+{
+  "metadata": {
+    "spreadsheetId": "1mgfDDFq_G0_Ut_v6HScIBWU7OubsaoPtjmJwTwLT0zc",
+    "sheetName": "2025",
+    "backupTimestamp": "2025-10-01T18:14:20.5325269Z",
+    "rowCount": 37,
+    "maxColumnCount": 13
+  },
+  "data": [
+    {
+      "rowIndex": 1,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "2024"
+        }
+      ]
+    },
+    {
+      "rowIndex": 2,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Inkomst"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "31\u00A0862,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "32\u00A0625,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "30\u00A0646,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "31\u00A0678,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "32\u00A0037,32"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "31\u00A0405,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "31\u00A0389,64"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "35\u00A0914,60"
+        }
+      ]
+    },
+    {
+      "rowIndex": 3,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Gemensamma"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "Jan"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "Feb"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "Mar"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "Apr"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "Maj"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "Juni"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "Juli"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "Augusti"
+        },
+        {
+          "column": "J",
+          "columnIndex": 10,
+          "value": "September"
+        },
+        {
+          "column": "K",
+          "columnIndex": 11,
+          "value": "Oktober"
+        },
+        {
+          "column": "L",
+          "columnIndex": 12,
+          "value": "November"
+        },
+        {
+          "column": "M",
+          "columnIndex": 13,
+          "value": "December"
+        }
+      ]
+    },
+    {
+      "rowIndex": 4,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Hyra"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "9\u00A0776,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "9\u00A0424,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "9\u00A0377,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "9\u00A0373,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "9\u00A0363,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "9\u00A0389,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "9\u00A0366,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "9\u00A0331,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 5,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Tele2"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "329,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "329,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "329,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "513,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "579,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "579,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "579,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "579,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 6,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "El"
+        }
+      ]
+    },
+    {
+      "rowIndex": 7,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "El-n\u00E4t"
+        }
+      ]
+    },
+    {
+      "rowIndex": 8,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Netflix"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "149,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "149,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "149,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "149,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "149,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "149,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "149,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "149,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 9,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Bilskatt"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": ""
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": ""
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "429,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 10,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Bill\u00E5n"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "2\u00A0189,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "2\u00A0186,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "2\u00A0186,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "2\u00A0186,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "2\u00A0185,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "2\u00A0186,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "2\u00A0184,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "2\u00A0184,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 11,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Bilservice"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": ""
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "10\u00A0147,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": ""
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": ""
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": ""
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": ""
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "5\u00A0825,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 12,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "IF Skadef\u00F6rs\u00E4kring"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "797,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "797,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "797,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "815,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "815,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "815,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "777,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "777,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 13,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Total"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "13\u00A0240,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "23\u00A0032,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "13\u00A0267,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "13\u00A0036,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "13\u00A0091,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "13\u00A0118,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "18\u00A0880,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "13\u00A0020,00"
+        },
+        {
+          "column": "J",
+          "columnIndex": 10,
+          "value": "0,00"
+        },
+        {
+          "column": "K",
+          "columnIndex": 11,
+          "value": "0,00"
+        },
+        {
+          "column": "L",
+          "columnIndex": 12,
+          "value": "0,00"
+        },
+        {
+          "column": "M",
+          "columnIndex": 13,
+          "value": "0,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 14,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "per person"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "6\u00A0620,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "11\u00A0516,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "6\u00A0633,50"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "6\u00A0518,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "6\u00A0545,50"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "6\u00A0559,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "9\u00A0440,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "6\u00A0510,00"
+        },
+        {
+          "column": "J",
+          "columnIndex": 10,
+          "value": "0,00"
+        },
+        {
+          "column": "K",
+          "columnIndex": 11,
+          "value": "0,00"
+        },
+        {
+          "column": "L",
+          "columnIndex": 12,
+          "value": "0,00"
+        },
+        {
+          "column": "M",
+          "columnIndex": 13,
+          "value": "0,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 15,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Inkomst efter r\u00E4kningar"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "25\u00A0242,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "21\u00A0109,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "24\u00A0012,50"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "25\u00A0160,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "25\u00A0491,82"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "24\u00A0846,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "21\u00A0949,64"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "29\u00A0404,60"
+        },
+        {
+          "column": "J",
+          "columnIndex": 10,
+          "value": "0,00"
+        },
+        {
+          "column": "K",
+          "columnIndex": 11,
+          "value": "0,00"
+        },
+        {
+          "column": "L",
+          "columnIndex": 12,
+          "value": "0,00"
+        },
+        {
+          "column": "M",
+          "columnIndex": 13,
+          "value": "0,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 16,
+      "cells": []
+    },
+    {
+      "rowIndex": 17,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Mina egna"
+        }
+      ]
+    },
+    {
+      "rowIndex": 18,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Spotify"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "119,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "119,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "119,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "119,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "119,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "119,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "119,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "119,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 19,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Bliwa Sjuk \u0026 Olycksf\u00F6rs\u00E4kring"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": ""
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "453,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "453,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "453,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "453,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "453,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "453,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "453,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 20,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Comviq mobil"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "195,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "195,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "195,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "195,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "279,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "279,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "279,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "279,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 21,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Playstation\u002B"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "95,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "95,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "95,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "95,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "95,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "95,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "95,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "95,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 22,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "A-kassa"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "140,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "140,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "160,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "160,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "160,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "160,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "160,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "160,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 23,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Fackavgift"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "235,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "235,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "235,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "235,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "235,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "235,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "235,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "235,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 24,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "CSN"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": ""
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "2\u00A0428,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": ""
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": ""
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "2\u00A0428,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": ""
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": ""
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "2 428,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 25,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Tandv\u00E5rd"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": ""
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "1\u00A0788,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 26,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "B\u00E4ckamot"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "2\u00A0500,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "2\u00A0500,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "2\u00A0500,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "2\u00A0500,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "2\u00A0500,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "2\u00A0500,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "2\u00A0500,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "2\u00A0500,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 27,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Mat"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "3\u00A0000,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "3\u00A0000,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "4\u00A0000,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "4\u00A0000,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "4\u00A0000,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "4\u00A0000,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "4\u00A0000,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "4\u00A0000,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 28,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Total"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "6\u00A0284,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "10\u00A0953,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "7\u00A0757,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "7\u00A0757,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "10\u00A0269,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "7\u00A0841,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "7\u00A0841,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "7\u00A0841,00"
+        },
+        {
+          "column": "J",
+          "columnIndex": 10,
+          "value": "0,00"
+        },
+        {
+          "column": "K",
+          "columnIndex": 11,
+          "value": "0,00"
+        },
+        {
+          "column": "L",
+          "columnIndex": 12,
+          "value": "0,00"
+        },
+        {
+          "column": "M",
+          "columnIndex": 13,
+          "value": "0,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 29,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Inkomst efter egna utgifter"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "18\u00A0958,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "10\u00A0156,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "16\u00A0255,50"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "17\u00A0403,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "15\u00A0222,82"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "17\u00A0005,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "14\u00A0108,64"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "21\u00A0563,60"
+        },
+        {
+          "column": "J",
+          "columnIndex": 10,
+          "value": "0,00"
+        },
+        {
+          "column": "K",
+          "columnIndex": 11,
+          "value": "0,00"
+        },
+        {
+          "column": "L",
+          "columnIndex": 12,
+          "value": "0,00"
+        },
+        {
+          "column": "M",
+          "columnIndex": 13,
+          "value": "0,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 30,
+      "cells": []
+    },
+    {
+      "rowIndex": 31,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "\u00C4ndra detta s\u00E5 det visar nuvarande v\u00E4rde och ist\u00E4llet f\u00F6r en total, redovisa en skillnad fr\u00E5n f\u00F6reg\u00E5ende m\u00E5nad"
+        }
+      ]
+    },
+    {
+      "rowIndex": 32,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Sparande"
+        }
+      ]
+    },
+    {
+      "rowIndex": 33,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Kontant"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "10\u00A0000,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": ""
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "10\u00A0000,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "10\u00A0000,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "10\u00A0000,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "10\u00A0000,00"
+        }
+      ]
+    },
+    {
+      "rowIndex": 34,
+      "cells": []
+    },
+    {
+      "rowIndex": 35,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Aktier \u0026 Fonder"
+        }
+      ]
+    },
+    {
+      "rowIndex": 36,
+      "cells": []
+    },
+    {
+      "rowIndex": 37,
+      "cells": [
+        {
+          "column": "A",
+          "columnIndex": 1,
+          "value": "Totalt"
+        },
+        {
+          "column": "B",
+          "columnIndex": 2,
+          "value": "10\u00A0000,00"
+        },
+        {
+          "column": "C",
+          "columnIndex": 3,
+          "value": "0,00"
+        },
+        {
+          "column": "D",
+          "columnIndex": 4,
+          "value": "10\u00A0000,00"
+        },
+        {
+          "column": "E",
+          "columnIndex": 5,
+          "value": "10\u00A0000,00"
+        },
+        {
+          "column": "F",
+          "columnIndex": 6,
+          "value": "10\u00A0000,00"
+        },
+        {
+          "column": "G",
+          "columnIndex": 7,
+          "value": "10\u00A0000,00"
+        },
+        {
+          "column": "H",
+          "columnIndex": 8,
+          "value": "0,00"
+        },
+        {
+          "column": "I",
+          "columnIndex": 9,
+          "value": "0,00"
+        },
+        {
+          "column": "J",
+          "columnIndex": 10,
+          "value": "0,00"
+        },
+        {
+          "column": "K",
+          "columnIndex": 11,
+          "value": "0,00"
+        },
+        {
+          "column": "L",
+          "columnIndex": 12,
+          "value": "0,00"
+        },
+        {
+          "column": "M",
+          "columnIndex": 13,
+          "value": "0,00"
+        }
+      ]
+    }
+  ]
+}

@@ -253,6 +253,81 @@ public class GoogleSheetsServiceTests
         }
     }
 
+    [Fact]
+    public async Task UpdateCellAsync_PreservesNumericDataType()
+    {
+        // Arrange
+        var spreadsheetId = "numeric-type-test-spreadsheet";
+        var sheetName = "Budget";
+        var row = 5;
+        var column = 3;
+        
+        var testValues = new[]
+        {
+            123.45m,    // Regular decimal
+            0m,         // Zero
+            -150.50m,   // Negative value
+            1000.00m,   // Round number
+            0.01m,      // Small decimal
+            999999.99m  // Large number
+        };
+
+        foreach (var testValue in testValues)
+        {
+            // Act
+            await _mockService.UpdateCellAsync(spreadsheetId, sheetName, row, column, testValue);
+            
+            // Verify the mock correctly stores numeric value without precision loss
+            var retrievedValue = await _mockService.GetCellValueAsync(spreadsheetId, sheetName, row, column);
+            
+            // Assert - Value should be exactly preserved
+            Assert.Equal(testValue, retrievedValue);
+            
+            // Additional verification: Check that the mock is handling the value as a number, not text
+            var allCells = _mockService.GetAllCellValues(spreadsheetId, sheetName);
+            Assert.True(allCells.ContainsKey((row, column)));
+            Assert.Equal(testValue, allCells[(row, column)]);
+        }
+    }
+
+    [Fact]
+    public async Task BatchUpdateCellsAsync_PreservesNumericDataTypes()
+    {
+        // Arrange
+        var spreadsheetId = "batch-numeric-test-spreadsheet";
+        var sheetName = "Budget";
+        
+        var updates = new Dictionary<(int row, int column), decimal>
+        {
+            { (2, 3), 1234.56m },     // Income
+            { (4, 5), 567.89m },      // Rent
+            { (16, 7), 12.99m },      // Spotify
+            { (25, 8), -450.25m },    // Negative expense
+            { (32, 12), 0.00m }       // Zero value
+        };
+
+        // Act
+        await _mockService.BatchUpdateCellsAsync(spreadsheetId, sheetName, updates);
+
+        // Assert - All values should be preserved exactly
+        var result = await _mockService.BatchGetCellValuesAsync(spreadsheetId, sheetName, updates.Keys);
+        
+        Assert.Equal(updates.Count, result.Count);
+        foreach (var (coord, expectedValue) in updates)
+        {
+            Assert.True(result.ContainsKey(coord), $"Result should contain coordinate {coord}");
+            Assert.Equal(expectedValue, result[coord]);
+        }
+        
+        // Additional verification: Check internal storage maintains numeric precision
+        var allCells = _mockService.GetAllCellValues(spreadsheetId, sheetName);
+        foreach (var (coord, expectedValue) in updates)
+        {
+            Assert.True(allCells.ContainsKey(coord));
+            Assert.Equal(expectedValue, allCells[coord]);
+        }
+    }
+
     [Theory]
     [InlineData(1, 1, "A1")]
     [InlineData(1, 26, "Z1")]

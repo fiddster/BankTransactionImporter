@@ -7,3 +7,6 @@ data/
 .claude/
 .vscode/
 **/CLAUDE.md
+
+# Google Sheets API credentials
+**/config/google-credentials.json

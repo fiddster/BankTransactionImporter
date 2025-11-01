@@ -4,12 +4,15 @@ A .NET console application that imports Swedish bank transaction CSV files and m
 
 ## Features
 
-- ✅ Parse Swedish bank transaction CSV files
+- ✅ Parse Swedish bank transaction CSV files with encoding fallback support
 - ✅ Map transactions to budget categories using configurable rules
 - ✅ Support for Swedish date and number formats
+- ✅ Automatic year-based sheet mapping (transactions → "2025" sheet)
 - ✅ Detailed logging and transaction mapping results
 - ✅ Dry-run mode for preview before updating
-- 🚧 Google Sheets integration (mock implementation)
+- ✅ Google Sheets integration with real API support
+- ✅ Backup and restore functionality
+- ✅ Batch cell updates for improved performance
 
 ## Setup
 
@@ -27,36 +30,67 @@ Configure the application by editing the files in the `config/` folder:
 - **`appsettings.json`**: Main application settings
 - **`mapping-rules.json`**: Transaction-to-category mapping rules
 
-### 3. Google Sheets Setup (TODO)
+### 3. Google Sheets Setup
 
-The Google Sheets integration is currently using a mock implementation. To enable real integration:
+The application supports full Google Sheets integration:
 
 1. Create a Google Cloud project
 2. Enable the Google Sheets API
-3. Create credentials (Service Account or OAuth2)
-4. Update the `GoogleSheetsService.cs` to use real authentication
+3. Create a Service Account and download credentials JSON
+4. Place credentials at `src/BankTransactionImporter/config/google-credentials.json`
+5. Update `SpreadsheetId` in `appsettings.json` with your sheet ID
 
 ## Usage
 
-### Basic Usage
+### Transaction Processing
 
 ```bash
 # Process a transaction file (dry-run mode)
 dotnet run -- --file "../../data/Transaktioner_2025-10-01_17-03-34.csv" --dry-run
 
-# Process and update Google Sheets (when implemented)
+# Process and update Google Sheets
 dotnet run -- --file "../../data/Transaktioner_2025-10-01_17-03-34.csv"
 
-# Specify a different sheet name
+# Specify a different sheet name (overrides automatic year detection)
 dotnet run -- --file "../../data/transactions.csv" --sheet "2025"
+```
+
+### Backup Commands
+
+```bash
+# Create backup (default location)
+dotnet run backup
+
+# Create backup to custom folder
+dotnet run backup C:\MyBackups
+
+# List available backups
+dotnet run list-backups
+```
+
+### Utility Commands
+
+```bash
+# Test Google Sheets connection
+dotnet run test-connection
+
+# Show help
+dotnet run help
 ```
 
 ### Command Line Options
 
+**Transaction Processing:**
 - `--file, -f <path>`: Path to the CSV transaction file (required)
-- `--sheet, -s <name>`: Name of the Google Sheets tab (optional)
+- `--sheet, -s <name>`: Name of the Google Sheets tab (optional, overrides auto year detection)
 - `--dry-run, -d`: Preview changes without updating (optional)
 - `--help, -h`: Show help message
+
+**Special Commands:**
+- `backup [path]`: Create backup of Google Sheets data
+- `list-backups`: List all available backups
+- `test-connection`: Test Google Sheets API connection
+- `help`: Show detailed help message
 
 ## CSV File Format
 
@@ -67,13 +101,15 @@ The application expects Swedish bank transaction files with the following column
 - Kontonummer (Account number)
 - Produkt (Product)
 - Valuta (Currency)
-- Bokföringsdag (Booking date)
+- Bokföringsdag (Booking date) - supports encoding variants like "Bokf�ringsdag"
 - Transaktionsdag (Transaction date)
 - Valutadag (Currency date)
 - Referens (Reference)
 - Beskrivning (Description)
 - Belopp (Amount)
-- Bokfört saldo (Booked balance)
+- Bokfört saldo (Booked balance) - supports encoding variants like "Bokf�rt saldo"
+
+**Note:** The application automatically handles Swedish character encoding issues common in bank export files.
 
 ## Mapping Rules
 
@@ -114,23 +150,60 @@ info: BankTransactionImporter.Application[0]
 info: BankTransactionImporter.Application[0]
       Loaded 22 transactions from ../../data/Transaktioner_2025-10-01_17-03-34.csv
 info: BankTransactionImporter.Application[0]
+      Found transactions spanning 1 year(s): 2025
+info: BankTransactionImporter.Application[0]
+      Processing 22 transactions for year 2025 → sheet '2025'
+info: BankTransactionImporter.Application[0]
+      === RESULTS FOR SHEET '2025' ===
+info: BankTransactionImporter.Application[0]
       === TRANSACTION MAPPING RESULTS ===
 info: BankTransactionImporter.Application[0]
-        Tele2 (09): 579.00 kr (1 transactions)
+        Tele2 (09): ¤579.00 (1 transactions)
 info: BankTransactionImporter.Application[0]
-        A-kassa (09): 160.00 kr (1 transactions)
+        A-kassa (09): ¤160.00 (1 transactions)
 info: BankTransactionImporter.Application[0]
-        Mat (09): 4,000.00 kr (1 transactions)
+        Mat (09): ¤4,000.00 (1 transactions)
+info: BankTransactionImporter.Application[0]
+        Hyra (09): ¤9,657.00 (1 transactions)
+info: BankTransactionImporter.Application[0]
+        Inkomst (09): ¤32,505.00 (1 transactions)
+info: BankTransactionImporter.Application[0]
+      Dry run mode enabled for sheet '2025'. No changes will be made.
 ```
 
-## Next Steps
+## How It Works
 
-1. **Complete Google Sheets Integration**: Implement real authentication and API calls
-2. **Enhanced Mapping**: Add fuzzy matching and machine learning for better categorization
-3. **Multi-file Processing**: Support batch processing of multiple CSV files
-4. **Data Validation**: Add more robust validation and error handling
-5. **GUI Interface**: Consider creating a desktop or web interface
-6. **Backup & Restore**: Implement backup functionality before making changes
+1. **Automatic Year Detection**: Transactions are automatically grouped by year and mapped to corresponding sheets (e.g., 2025 transactions → "2025" sheet)
+2. **Month Column Mapping**: Each transaction is placed in the correct month column (01-12) based on the booking date
+3. **Category Mapping**: Transactions are mapped to budget categories using configurable rules based on Reference or Description fields
+4. **Batch Updates**: Multiple cell updates are batched together for optimal Google Sheets API performance
+5. **Encoding Support**: Handles Swedish character encoding issues automatically
+
+## Troubleshooting
+
+### Common Issues
+
+**Date parsing fails (year shows as 1):**
+- Usually caused by CSV encoding issues with Swedish characters
+- The app automatically handles `Bokf�ringsdag` variants
+- Ensure your CSV uses standard Swedish bank export format
+
+**Transactions not mapping to categories:**
+- Check the mapping rules in `config/mapping-rules.json`
+- Review the debug logs to see what reference/description values are being processed
+- Add new mapping rules for unmapped transactions
+
+**Google Sheets connection issues:**
+- Verify `google-credentials.json` is in the correct location
+- Check that the SpreadsheetId in `appsettings.json` is correct
+- Use `dotnet run test-connection` to verify API access
+
+## Future Enhancements
+
+1. **Enhanced Mapping**: Add fuzzy matching and machine learning for better categorization
+2. **Multi-file Processing**: Support batch processing of multiple CSV files  
+3. **GUI Interface**: Consider creating a desktop or web interface
+4. **Advanced Analytics**: Add spending analysis and reporting features
 
 ## Dependencies
 

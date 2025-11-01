@@ -79,44 +79,93 @@ public class Application
             return;
         }
 
-        // Load sheet structure
-        var sheetName = options.SheetName ?? _settings.GoogleSheets.DefaultSheetName;
-        var sheetStructure = await _googleSheetsService.LoadSheetStructureAsync(
-            _settings.GoogleSheets.SpreadsheetId, sheetName);
-
-        // Process and map transactions
-        var mappedTransactions = new Dictionary<string, List<(Models.Transaction transaction, Models.BudgetCategory category)>>();
-        var unmappedTransactions = new List<Models.Transaction>();
-
-        foreach (var transaction in transactions)
+        // Group transactions by year for automatic sheet mapping
+        if (options.SheetName != null)
         {
-            var category = _transactionMapper.MapTransaction(transaction, sheetStructure);
-            if (category != null)
-            {
-                var key = $"{category.Name}_{transaction.Month}";
-                if (!mappedTransactions.ContainsKey(key))
-                {
-                    mappedTransactions[key] = new List<(Models.Transaction, Models.BudgetCategory)>();
-                }
-                mappedTransactions[key].Add((transaction, category));
-            }
-            else
-            {
-                unmappedTransactions.Add(transaction);
-            }
-        }
-
-        // Display mapping results
-        DisplayMappingResults(mappedTransactions, unmappedTransactions);
-
-        // Update spreadsheet if not in dry run mode
-        if (!_settings.Processing.DryRun && !options.DryRun)
-        {
-            await UpdateSpreadsheetAsync(sheetName, mappedTransactions, sheetStructure);
+            // Manual sheet override - process all transactions in specified sheet
+            _logger.LogInformation("Using manual sheet override: {SheetName}", options.SheetName);
+            await ProcessTransactionsForSheet(options.SheetName, transactions, options.DryRun);
         }
         else
         {
-            _logger.LogInformation("Dry run mode enabled. No changes will be made to the spreadsheet.");
+            // Automatic year-based sheet mapping
+            var transactionsByYear = transactions.GroupBy(t => t.Year).ToList();
+            _logger.LogInformation("Found transactions spanning {YearCount} year(s): {Years}", 
+                transactionsByYear.Count, 
+                string.Join(", ", transactionsByYear.Select(g => g.Key).OrderBy(y => y)));
+
+            // Debug: Show transaction dates and years
+            foreach (var transaction in transactions.Take(3))
+            {
+                _logger.LogDebug("Transaction: BookingDate={BookingDate}, Year={Year}, Month={Month}", 
+                    transaction.BookingDate, transaction.Year, transaction.Month);
+            }
+
+            foreach (var yearGroup in transactionsByYear.OrderBy(g => g.Key))
+            {
+                var sheetName = GetSheetNameForYear(yearGroup.Key);
+                _logger.LogInformation("Processing {Count} transactions for year {Year} → sheet '{SheetName}'", 
+                    yearGroup.Count(), yearGroup.Key, sheetName);
+                
+                await ProcessTransactionsForSheet(sheetName, yearGroup.ToList(), options.DryRun);
+            }
+        }
+    }
+
+    private string GetSheetNameForYear(int year)
+    {
+        // Generate sheet name from year (e.g., 2024 → "2024")
+        return year.ToString();
+    }
+
+    private async Task ProcessTransactionsForSheet(string sheetName, List<Models.Transaction> transactions, bool dryRun)
+    {
+        try
+        {
+            // Load sheet structure for this specific sheet
+            var sheetStructure = await _googleSheetsService.LoadSheetStructureAsync(
+                _settings.GoogleSheets.SpreadsheetId, sheetName);
+
+            // Process and map transactions
+            var mappedTransactions = new Dictionary<string, List<(Models.Transaction transaction, Models.BudgetCategory category)>>();
+            var unmappedTransactions = new List<Models.Transaction>();
+
+            foreach (var transaction in transactions)
+            {
+                var category = _transactionMapper.MapTransaction(transaction, sheetStructure);
+                if (category != null)
+                {
+                    var key = $"{category.Name}_{transaction.Month}";
+                    if (!mappedTransactions.ContainsKey(key))
+                    {
+                        mappedTransactions[key] = new List<(Models.Transaction, Models.BudgetCategory)>();
+                    }
+                    mappedTransactions[key].Add((transaction, category));
+                }
+                else
+                {
+                    unmappedTransactions.Add(transaction);
+                }
+            }
+
+            // Display mapping results for this sheet
+            _logger.LogInformation("=== RESULTS FOR SHEET '{SheetName}' ===", sheetName);
+            DisplayMappingResults(mappedTransactions, unmappedTransactions);
+
+            // Update spreadsheet if not in dry run mode
+            if (!_settings.Processing.DryRun && !dryRun)
+            {
+                await UpdateSpreadsheetAsync(sheetName, mappedTransactions, sheetStructure);
+            }
+            else
+            {
+                _logger.LogInformation("Dry run mode enabled for sheet '{SheetName}'. No changes will be made.", sheetName);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to process transactions for sheet '{SheetName}'. This may indicate the sheet doesn't exist or has structural issues.", sheetName);
+            throw new InvalidOperationException($"Failed to process sheet '{sheetName}'. Please ensure the sheet exists and has the correct structure.", ex);
         }
     }
 

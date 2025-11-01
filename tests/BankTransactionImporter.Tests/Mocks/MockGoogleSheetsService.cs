@@ -165,6 +165,45 @@ public class MockGoogleSheetsService : IGoogleSheetsService
         return result;
     }
 
+    public async Task<List<List<string>>> GetAllSheetDataAsync(string spreadsheetId, string sheetName)
+    {
+        _logger.LogInformation("Mock reading all data from sheet '{SheetName}' in spreadsheet '{SpreadsheetId}'", sheetName, spreadsheetId);
+        
+        await Task.Delay(50); // Simulate network delay for large data download
+        
+        var result = new List<List<string>>();
+        
+        if (!_spreadsheets.ContainsKey(spreadsheetId) || 
+            !_spreadsheets[spreadsheetId].Sheets.ContainsKey(sheetName))
+        {
+            return result; // Return empty list if sheet doesn't exist
+        }
+
+        var sheet = _spreadsheets[spreadsheetId].Sheets[sheetName];
+        
+        // Find the maximum row and column to determine sheet bounds
+        int maxRow = 0, maxCol = 0;
+        foreach (var ((row, col), _) in sheet.Cells)
+        {
+            maxRow = Math.Max(maxRow, row);
+            maxCol = Math.Max(maxCol, col);
+        }
+        
+        // Build the 2D list structure
+        for (int row = 1; row <= maxRow; row++)
+        {
+            var rowData = new List<string>();
+            for (int col = 1; col <= maxCol; col++)
+            {
+                var cellValue = sheet.Cells.TryGetValue((row, col), out var value) ? value : "";
+                rowData.Add(cellValue);
+            }
+            result.Add(rowData);
+        }
+        
+        return result;
+    }
+
     public void SimulateApiError(string spreadsheetId, string sheetName, string errorMessage)
     {
         if (!_spreadsheets.ContainsKey(spreadsheetId))
